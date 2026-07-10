@@ -1,0 +1,149 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "fullname": "Komakech Admin",
+      "email": "komakech@gmail.com",
+      "password": "$2a$10$LAUira4i0nP2femtIU2ULe0NIK2OF3EuZtli8PPJPGvQ5Nk6fTgtC",
+      "role": "admin",
+      "hospital_id": null,
+      "status": "active",
+      "created_at": "2026-06-02T00:00:00.000Z",
+      "updated_at": "2026-06-02T00:00:00.000Z"
+    },
+    {
+      "id": 2,
+      "fullname": "Emmanuel Admin",
+      "email": "emmanuel@gmail.com",
+      "password": "$2a$10$LAUira4i0nP2femtIU2ULe0NIK2OF3EuZtli8PPJPGvQ5Nk6fTgtC",
+      "role": "admin",
+      "hospital_id": null,
+      "status": "active",
+      "created_at": "2026-06-02T00:00:00.000Z",
+      "updated_at": "2026-06-02T00:00:00.000Z"
+    },
+    {
+      "id": 3,
+      "fullname": "Lisa User",
+      "email": "lisa@gmail.com",
+      "password": "$2a$10$LAUira4i0nP2femtIU2ULe0NIK2OF3EuZtli8PPJPGvQ5Nk6fTgtC",
+      "role": "waste_manager",
+      "hospital_id": null,
+      "status": "active",
+      "created_at": "2026-06-02T00:00:00.000Z",
+      "updated_at": "2026-06-02T00:00:00.000Z"
+    },
+    {
+      "id": 4,
+      "fullname": "Mercy User",
+      "email": "mercy@gmail.com",
+      "password": "$2a$10$LAUira4i0nP2femtIU2ULe0NIK2OF3EuZtli8PPJPGvQ5Nk6fTgtC",
+      "role": "collection_personnel",
+      "hospital_id": null,
+      "status": "active",
+      "created_at": "2026-06-02T00:00:00.000Z",
+      "updated_at": "2026-06-02T00:00:00.000Z"
+    },
+    {
+      "id": 5,
+      "fullname": "Gerald User",
+      "email": "gerald@gmail.com",
+      "password": "$2a$10$LAUira4i0nP2femtIU2ULe0NIK2OF3EuZtli8PPJPGvQ5Nk6fTgtC",
+      "role": "collection_personnel",
+      "hospital_id": null,
+      "status": "active",
+      "created_at": "2026-06-02T00:00:00.000Z",
+      "updated_at": "2026-06-02T00:00:00.000Z"
+    }
+  ],
+  "bins": [
+    {
+      "id": 1,
+      "bin_code": "BIN-1001",
+      "location": "North Wing - Entrance",
+      "hospital_id": 1,
+      "capacity_percentage": 28,
+      "status": "available",
+      "latitude": 0.3476,
+      "longitude": 32.5825,
+      "last_update": "2026-06-02T08:00:00.000Z"
+    },
+    {
+      "id": 2,
+      "bin_code": "BIN-1002",
+      "location": "Emergency Dept",
+      "hospital_id": 1,
+      "capacity_percentage": 76,
+      "status": "nearly_full",
+      "latitude": 0.3477,
+      "longitude": 32.5826,
+      "last_update": "2026-06-02T08:20:00.000Z"
+    },
+    {
+      "id": 3,
+      "bin_code": "BIN-1003",
+      "location": "Ward B",
+      "hospital_id": 1,
+      "capacity_percentage": 93,
+      "status": "full",
+      "latitude": 0.3478,
+      "longitude": 32.5827,
+      "last_update": "2026-06-02T08:10:00.000Z"
+    },
+    {
+      "id": 4,
+      "bin_code": "BIN-2001",
+      "location": "Main Corridor",
+      "hospital_id": 2,
+      "capacity_percentage": 44,
+      "status": "available",
+      "latitude": 0.348,
+      "longitude": 32.583,
+      "last_update": "2026-06-02T08:30:00.000Z"
+    }
+  ],
+  "notifications": [
+    {
+      "id": 1,
+      "user_id": 3,
+      "bin_id": 2,
+      "title": "Bin nearly full",
+      "message": "BIN-1002 is at 76% capacity",
+      "notification_type": "nearly_full",
+      "read_status": false,
+      "created_at": "2026-06-02T07:45:00.000Z"
+    }
+  ],
+  "collectionRecords": [
+    {
+      "id": 1,
+      "bin_id": 2,
+      "collected_by": 4,
+      "collection_date": "2026-06-01T10:30:00.000Z",
+      "remarks": "Routine pickup"
+    },
+    {
+      "id": 2,
+      "bin_id": 3,
+      "collected_by": 5,
+      "collection_date": "2026-06-01T16:45:00.000Z",
+      "remarks": "Emergency collection"
+    }
+  ],
+  "activityLogs": [
+    {
+      "id": 1,
+      "user_id": 1,
+      "action": "login",
+      "description": "Demo admin login",
+      "timestamp": "2026-06-02T08:00:00.000Z"
+    }
+  ],
+  "nextId": {
+    "users": 6,
+    "bins": 5,
+    "notifications": 3,
+    "collectionRecords": 3,
+    "activityLogs": 2
+  }
+}

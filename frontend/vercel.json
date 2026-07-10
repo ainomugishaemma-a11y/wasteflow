@@ -1,0 +1,9 @@
+{
+  "rewrites": [
+    { "source": "/((?!assets/|api/).*)", "destination": "/index.html" }
+  ],
+  "buildCommand": "npx vite build",
+  "outputDirectory": "dist",
+  "framework": "vite",
+  "installCommand": "npm install"
+}

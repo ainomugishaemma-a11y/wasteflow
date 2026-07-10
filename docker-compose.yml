@@ -1,0 +1,66 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: wasteflow-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_DATABASE: wasteflow_db
+      MYSQL_USER: wasteflow_user
+      MYSQL_PASSWORD: wasteflow_pass
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./database/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql
+      - ./database/seed.sql:/docker-entrypoint-initdb.d/02-seed.sql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
+    networks:
+      - wasteflow-network
+
+  backend:
+    build: ./backend
+    container_name: wasteflow-backend
+    environment:
+      NODE_ENV: development
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_USER: wasteflow_user
+      DB_PASSWORD: wasteflow_pass
+      DB_NAME: wasteflow_db
+      JWT_SECRET: your_secret_key_here
+      PORT: 5000
+    ports:
+      - "5000:5000"
+    depends_on:
+      mysql:
+        condition: service_healthy
+    volumes:
+      - ./backend/src:/app/src
+    networks:
+      - wasteflow-network
+
+  frontend:
+    build: ./frontend
+    container_name: wasteflow-frontend
+    environment:
+      VITE_API_URL: http://localhost:5000/api
+    ports:
+      - "5173:5173"
+    depends_on:
+      - backend
+    volumes:
+      - ./frontend/src:/app/src
+    networks:
+      - wasteflow-network
+
+volumes:
+  mysql_data:
+
+networks:
+  wasteflow-network:
+    driver: bridge
