@@ -20,7 +20,7 @@ export const Sidebar: React.FC = () => {
   const visibleItems = menuItems.filter(item => item.roles.includes(user?.role || ''));
 
   return (
-    <aside className="bg-white w-64 min-h-screen shadow-lg border-r border-gray-200">
+    <aside className="relative bg-white w-64 min-h-screen shadow-lg border-r border-gray-200">
       <div className="p-6">
         <h2 className="text-lg font-bold text-gray-900">Menu</h2>
       </div>
