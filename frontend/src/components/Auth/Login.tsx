@@ -89,27 +89,7 @@ export const Login: React.FC = () => {
             </button>
           </form>
 
-          <div className="mt-6 text-center text-sm text-gray-600">
-            <p>Demo credentials (use these when backend DB is unavailable):</p>
-            <p className="text-xs mt-2">Admins: komakech@gmail.com / job256, emmanuel@gmail.com / job256</p>
-            <p className="text-xs">Users: lisa@gmail.com / job256, mercy@gmail.com / job256, gerald@gmail.com / job256</p>
-            <div className="mt-3 flex justify-center gap-2">
-              <button
-                type="button"
-                onClick={() => { setEmail('komakech@gmail.com'); setPassword('job256'); }}
-                className="text-xs text-primary-600 underline"
-              >
-                Fill Admin
-              </button>
-              <button
-                type="button"
-                onClick={() => { setEmail('lisa@gmail.com'); setPassword('job256'); }}
-                className="text-xs text-primary-600 underline"
-              >
-                Fill User
-              </button>
-            </div>
-          </div>
+
         </div>
       </div>
     </div>
