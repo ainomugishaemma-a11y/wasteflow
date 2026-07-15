@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Navbar } from '@/components/Layout/Navbar';
-import { Sidebar } from '@/components/Layout/Sidebar';
+import { Layout } from '@/components/Layout/Layout';
 import { DashboardCards } from '@/components/Dashboard/DashboardCards';
 import { BinCapacityChart } from '@/components/Dashboard/BinCapacityChart';
 import { DailyReportChart } from '@/components/Dashboard/DailyReportChart';
@@ -40,41 +39,33 @@ export const DashboardPage: React.FC = () => {
   };
 
   return (
-    <div className="flex">
-      <Sidebar />
-      <div className="flex-1 flex flex-col">
-        <Navbar />
-        <main className="flex-1 p-8 overflow-auto">
-          <div className="max-w-7xl mx-auto">
-            <h1 className="text-3xl font-bold text-gray-900 mb-2">Dashboard</h1>
-            <p className="text-gray-600 mb-8">Welcome to WasteFlow - Healthcare Waste Management System</p>
+    <Layout
+      title="Dashboard"
+      subtitle="Welcome to WasteFlow - Healthcare Waste Management System"
+    >
+      {isLoading ? (
+        <div className="animate-pulse space-y-6">
+          <div className="h-32 bg-gray-200 rounded-lg"></div>
+          <div className="h-64 bg-gray-200 rounded-lg"></div>
+        </div>
+      ) : (
+        <>
+          <DashboardCards stats={stats} />
 
-            {isLoading ? (
-              <div className="animate-pulse space-y-6">
-                <div className="h-32 bg-gray-200 rounded-lg"></div>
-                <div className="h-64 bg-gray-200 rounded-lg"></div>
-              </div>
-            ) : (
-              <>
-                <DashboardCards stats={stats} />
-
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                  <div className="lg:col-span-2">
-                    <BinCapacityChart data={[]} isLoading={false} />
-                  </div>
-                  <div>
-                    <DailyReportChart data={stats} isLoading={false} />
-                  </div>
-                </div>
-
-                <div className="mt-6">
-                  <BinMap bins={[]} />
-                </div>
-              </>
-            )}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div className="lg:col-span-2">
+              <BinCapacityChart data={[]} isLoading={false} />
+            </div>
+            <div>
+              <DailyReportChart data={stats} isLoading={false} />
+            </div>
           </div>
-        </main>
-      </div>
-    </div>
+
+          <div className="mt-6">
+            <BinMap bins={[]} />
+          </div>
+        </>
+      )}
+    </Layout>
   );
 };

@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider } from '@/context/AuthContext';
 import { NotificationProvider } from '@/context/NotificationContext';
+import { LayoutProvider } from '@/context/LayoutContext';
 import { ProtectedRoute } from '@/components/ProtectedRoute';
 import { Login } from '@/components/Auth/Login';
 import { DashboardPage } from '@/pages/DashboardPage';
@@ -16,6 +17,7 @@ function App() {
     <Router>
       <AuthProvider>
         <NotificationProvider>
+          <LayoutProvider>
           <Routes>
             {/* Public Routes */}
             <Route path="/login" element={<Login />} />
@@ -74,6 +76,7 @@ function App() {
             <Route path="/" element={<Navigate to="/dashboard" replace />} />
             <Route path="*" element={<Navigate to="/dashboard" replace />} />
           </Routes>
+          </LayoutProvider>
         </NotificationProvider>
       </AuthProvider>
     </Router>
