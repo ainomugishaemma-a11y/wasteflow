@@ -18,25 +18,6 @@ export const demoUsers: DemoUser[] = [
   { id: 5, fullname: 'Gerald', email: 'gerald@gmail.com', password: 'job256', role: 'collection_personnel', status: 'active' },
 ];
 
-export interface DemoBin {
-  id: number;
-  bin_code: string;
-  location: string;
-  hospital_id: number;
-  capacity_percentage: number;
-  status: 'available' | 'nearly_full' | 'full';
-  latitude?: number;
-  longitude?: number;
-  last_update?: Date;
-}
-
-export const demoBins: DemoBin[] = [
-  { id: 1, bin_code: 'BIN-1001', location: 'North Wing - Entrance', hospital_id: 1, capacity_percentage: 25, status: 'available', latitude: 0.3476, longitude: 32.5825, last_update: new Date() },
-  { id: 2, bin_code: 'BIN-1002', location: 'Emergency Dept', hospital_id: 1, capacity_percentage: 78, status: 'nearly_full', latitude: 0.3477, longitude: 32.5826, last_update: new Date() },
-  { id: 3, bin_code: 'BIN-1003', location: 'Ward B', hospital_id: 1, capacity_percentage: 95, status: 'full', latitude: 0.3478, longitude: 32.5827, last_update: new Date() },
-  { id: 4, bin_code: 'BIN-2001', location: 'Main Corridor', hospital_id: 2, capacity_percentage: 45, status: 'available', latitude: 0.3480, longitude: 32.5830, last_update: new Date() },
-];
-
 export const demoNotifications = [
   { id: 1, user_id: 3, bin_id: 2, title: 'Bin nearly full', message: 'BIN-1002 is at 78%', notification_type: 'nearly_full', read_status: false, created_at: new Date() },
   { id: 2, user_id: 1, bin_id: 3, title: 'Bin full', message: 'BIN-1003 is full', notification_type: 'full', read_status: false, created_at: new Date() },
@@ -58,7 +39,6 @@ export function hashDemoPassword(plain: string) {
 
 export default {
   demoUsers,
-  demoBins,
   demoNotifications,
   demoCollectionRecords,
   findDemoUserByEmail,
