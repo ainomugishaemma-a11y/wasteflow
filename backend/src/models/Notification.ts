@@ -79,7 +79,7 @@ export class NotificationModel {
 
   static async notifyWasteManagers(binId: number, title: string, message: string, type: 'nearly_full' | 'full' | 'not_emptied'): Promise<void> {
     const db = await readDatabase();
-    const targets = db.users.filter(u => ['waste_manager', 'hospital_admin'].includes(u.role) && u.status === 'active');
+    const targets = db.users.filter(u => ['admin', 'waste_manager', 'hospital_admin'].includes(u.role) && u.status === 'active');
     targets.forEach(user => {
       db.notifications.push({
         id: db.nextId.notifications++,
