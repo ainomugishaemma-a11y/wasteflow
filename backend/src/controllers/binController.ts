@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import { BinModel } from '../models/Bin';
+import { NotificationModel } from '../models/Notification';
 import logger from '../utils/logger';
 
 const BinController = {
@@ -23,6 +24,22 @@ const BinController = {
         status,
         last_update: new Date().toISOString(),
       });
+
+      if (status === 'full') {
+        await NotificationModel.notifyWasteManagers(
+          bin.id,
+          `Bin ${bin_code} is full`,
+          `Bin ${bin_code} at ${bin.location} has reached ${capacity_percentage}% capacity and needs collection.`,
+          'full'
+        );
+      } else if (status === 'nearly_full') {
+        await NotificationModel.notifyWasteManagers(
+          bin.id,
+          `Bin ${bin_code} is nearly full`,
+          `Bin ${bin_code} at ${bin.location} is at ${capacity_percentage}% capacity.`,
+          'nearly_full'
+        );
+      }
 
       const updatedBin = await BinModel.findById(bin.id);
       res.json({ message: 'Bin update received', bin: updatedBin });
