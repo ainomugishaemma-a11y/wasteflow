@@ -9,6 +9,7 @@ import binRoutes from './routes/bins';
 import notificationRoutes from './routes/notifications';
 import reportRoutes from './routes/reports';
 import dashboardRoutes from './routes/dashboard';
+import userRoutes from './routes/users';
 
 const app: Express = express();
 app.set('trust proxy', 1);
@@ -36,6 +37,7 @@ app.use('/api/bins', binRoutes);
 app.use('/api/notifications', notificationRoutes);
 app.use('/api/reports', reportRoutes);
 app.use('/api/dashboard', dashboardRoutes);
+app.use('/api/users', userRoutes);
 
 app.use(notFoundHandler);
 app.use(errorHandler);
