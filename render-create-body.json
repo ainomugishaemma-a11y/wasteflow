@@ -1,0 +1,1 @@
+{"type":"web_service","name":"wasteflow-backend","ownerId":"tea-d98djt67r5hc73cua8c0","repo":"https://github.com/ainomugishaemma-a11y/wasteflow","branch":"main","autoDeploy":"yes","runtime":"node","serviceDetails":{"buildCommand":"npm install && npx tsc","startCommand":"node api/index.js","healthCheckPath":"/health","plan":"free"}}

@@ -1,0 +1,431 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{setspace}
+\usepackage{tocloft}
+\usepackage{hyperref}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{xcolor}
+
+\geometry{margin=1in}
+\onehalfspacing
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{Trinity 2026 Workshop Practice Report}
+\fancyhead[R]{Uganda Christian University}
+\fancyfoot[C]{\thepage}
+
+\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
+
+\title{\textbf{Workshop Practices Report for Recess Week}}
+\author{}
+\date{}
+
+\begin{document}
+
+% ============================================================
+% COVER PAGE
+% ============================================================
+\begin{titlepage}
+    \centering
+    \includegraphics[width=0.2\textwidth]{ucu_logo.png}\\[0.5cm]
+    {\large Uganda Christian University}\\[0.3cm]
+    {\large Faculty of Science and Technology}\\[0.3cm]
+    {\large Department of Computing and Technology}\\[1cm]
+    {\Huge \textbf{Workshop Practices Report}}\\[0.5cm]
+    {\Large \textbf{Recess Week}}\\[1cm]
+    \begin{tabular}{rl}
+        \textbf{Project Titles:} & ZAMAD App \& WasteFlow System \\
+        \textbf{Programme:} & BSCS \\
+        \textbf{Year:} & 1 \\
+        \textbf{Semester:} & 2 \\
+        \textbf{Week:} & 10 (Recess) \\
+        \textbf{Venue:} & UCU Main Campus \& Remote \\
+        \textbf{Date:} & July 2026 \\
+    \end{tabular}\\[1cm]
+    \begin{tabular}{rl}
+        \textbf{Student Name:} & Komakech Emmanuel \\
+        \textbf{Registration Number:} & S23B13/001 \\
+        \textbf{Access Number:} & A12345 \\
+    \end{tabular}\\[1cm]
+    \begin{tabular}{rl}
+        \textbf{Group Number:} & Group 30 \\
+    \end{tabular}
+\end{titlepage}
+
+% ============================================================
+% EXECUTIVE SUMMARY
+% ============================================================
+\newpage
+\section*{Executive Summary}
+\addcontentsline{toc}{section}{Executive Summary}
+
+This report details the activities undertaken during Trinity 2026 Recess Week (Week 10). The week was divided across two software development projects and one university seminar.
+
+The first project, \textbf{ZAMAD}, involved building a mobile application with token-based authentication for secure resource access. This project introduced practical experience with JSON Web Tokens (JWT), user session management, and secure API communication.
+
+On Wednesday, the student attended a University ICT Services talk on internet privacy regulations. The session covered the Uganda Data Protection and Privacy Act (2019), GDPR principles, and best practices for safeguarding user data in student projects. This talk directly influenced security decisions made in both projects.
+
+The remainder of the week was dedicated to the \textbf{WasteFlow} project --- a smart healthcare waste management system. Work included deploying a React-based frontend to Vercel with a TypeScript/Express backend deployed on Render via Docker. Key activities involved configuring CI/CD pipelines, debugging environment variable propagation, and verifying end-to-end authentication flows.
+
+Tools used included VSCode, Git, GitHub, Vercel CLI, Render Dashboard, Docker, Postman, and the React/Vite ecosystem. Key takeaways included understanding production deployment workflows, the importance of environment isolation, and legal obligations around user data privacy.
+
+% ============================================================
+% TABLE OF CONTENTS
+% ============================================================
+\newpage
+\tableofcontents
+
+% ============================================================
+% LIST OF FIGURES
+% ============================================================
+\newpage
+\listoffigures
+
+% ============================================================
+% LIST OF ACRONYMS
+% ============================================================
+\newpage
+\section*{List of Acronyms}
+\addcontentsline{toc}{section}{List of Acronyms}
+\begin{table}[h]
+    \centering
+    \begin{tabular}{ll}
+        \textbf{API}  & Application Programming Interface \\
+        \textbf{CI/CD} & Continuous Integration / Continuous Deployment \\
+        \textbf{Docker} & Containerization Platform \\
+        \textbf{GDPR} & General Data Protection Regulation \\
+        \textbf{JWT}  & JSON Web Token \\
+        \textbf{QR}   & Quick Response (code) \\
+        \textbf{REST} & Representational State Transfer \\
+        \textbf{SPA}  & Single Page Application \\
+        \textbf{URL}  & Uniform Resource Locator \\
+        \textbf{VITE} & Frontend Build Tool \\
+    \end{tabular}
+\end{table}
+
+% ============================================================
+% 1. INTRODUCTION
+% ============================================================
+\newpage
+\section{Introduction}
+\label{sec:introduction}
+
+Modern software development demands proficiency across the full stack --- from frontend user interfaces to backend services, authentication systems, and production deployment. Recess Week provided an intensive opportunity to apply classroom theory to real-world projects.
+
+This report covers three major experiences:
+\begin{enumerate}
+    \item Building the \textbf{ZAMAD} application with token-based access control
+    \item Attending a University ICT Services seminar on data privacy regulations
+    \item Deploying the \textbf{WasteFlow} healthcare waste management system to production
+\end{enumerate}
+
+Each activity reinforced different aspects of the software development lifecycle: authentication architecture, legal compliance, and deployment operations.
+
+% ============================================================
+% 2. BACKGROUND
+% ============================================================
+\section{Background of the Design}
+\label{sec:background}
+
+\subsection{ZAMAD Application}
+ZAMAD is a mobile application designed to provide secure, token-gated access to digital resources. The system required a stateless authentication mechanism where users receive a JWT upon login and present it with subsequent requests. This design was chosen to avoid server-side session storage and enable horizontal scaling.
+
+\subsection{WasteFlow System}
+WasteFlow addresses the problem of healthcare waste management tracking. It consists of a React+Vite frontend communicating with a TypeScript/Express REST API. The backend stores data in a JSON file database and serves endpoints for bin monitoring, user management, notifications, and reporting. Deployment targets were Vercel (frontend) and Render (backend).
+
+\subsection{Privacy Context}
+Both projects collect and process user personal data (names, email addresses, roles). The ICT Services talk contextualised these design decisions within Uganda's legal framework, emphasising the need for encryption, access control, and data minimisation.
+
+% ============================================================
+% 3. OBJECTIVES
+% ============================================================
+\section{Objectives of the Week}
+\label{sec:objectives}
+
+\begin{enumerate}
+    \item Implement token-based authentication in the ZAMAD mobile application
+    \item Understand legal privacy requirements for internet-connected projects
+    \item Deploy a full-stack web application (WasteFlow) to production
+    \item Configure environment variables correctly across development and production
+    \item Verify end-to-end authentication and API functionality
+    \item Document deployment workflows for future reference
+\end{enumerate}
+
+% ============================================================
+% 4. ACTIVITIES
+% ============================================================
+\newpage
+\section{Activities Undertaken}
+\label{sec:activities}
+
+% ---------- 4.1 ----------
+\subsection{ZAMAD Token-Based Authentication}
+\label{subsec:zamad}
+
+\subsubsection*{Procedures Followed}
+\begin{enumerate}
+    \item Designed the user authentication flow: register $\rightarrow$ login $\rightarrow$ JWT issuance $\rightarrow$ protected routes
+    \item Implemented JWT generation on the backend using a secret key
+    \item Created middleware to verify tokens on protected endpoints
+    \item Built login and registration screens on the mobile frontend
+    \item Stored the access token securely on the device after login
+    \item Attached the token as an \texttt{Authorization: Bearer <token>} header on all API requests
+    \item Tested token expiry and refresh logic
+\end{enumerate}
+
+\subsubsection*{Tools/Resources Used}
+\begin{itemize}
+    \item VSCode for code editing
+    \item Node.js with Express for the backend API
+    \item JWT library (\texttt{jsonwebtoken}) for token creation and verification
+    \item Postman for manual API testing
+    \item Git for version control
+\end{itemize}
+
+\subsubsection*{Challenges Encountered}
+Initially, token expiry caused silent failures --- the frontend received 401 responses without clear feedback. This was resolved by implementing an interceptor that catches 401 errors and redirects to the login page. Another challenge was securely storing the token on the mobile client; the solution used the device's encrypted storage API.
+
+\subsubsection*{Learning Insights}
+Token-based authentication decouples the client from the server, enabling stateless API design. Understanding the difference between access tokens (short-lived) and refresh tokens (long-lived) was a key realisation. The ICT Services talk later reinforced that tokens must be transmitted over HTTPS to prevent interception.
+
+\subsubsection*{Applications}
+JWT-based auth is the industry standard for modern web and mobile APIs. Companies like Auth0, Google, and Microsoft use similar patterns for their authentication services.
+
+% ---------- 4.2 ----------
+\subsection{University ICT Services Talk --- Privacy on the Internet}
+\label{subsec:ict_talk}
+
+On Wednesday, the student attended a talk delivered by the University ICT Services department. The session addressed legal and ethical obligations for student projects that operate on the internet.
+
+\begin{figure}[H]
+    \centering
+    \fbox{\parbox{0.8\textwidth}{\centering\vspace{3cm}\textbf{Photo: Student at ICT Services Talk}\vspace{3cm}}}
+    \caption{Attendance at the University ICT Services privacy seminar}
+    \label{fig:ict_talk}
+\end{figure}
+
+\subsubsection*{Procedures Followed}
+\begin{enumerate}
+    \item Attended the scheduled session at the university ICT hall
+    \item Took notes on key privacy regulations affecting software projects
+    \item Reviewed the Uganda Data Protection and Privacy Act (2019)要点
+    \item Discussed case studies of data breaches in student projects
+    \item Asked questions about GDPR compliance for international-facing applications
+\end{enumerate}
+
+\subsubsection*{Tools/Resources Used}
+\begin{itemize}
+    \item Presentation slides from ICT Services
+    \item Uganda Data Protection and Privacy Act (2019) handout
+    \item Personal notebook for note-taking
+\end{itemize}
+
+\subsubsection*{Challenges Encountered}
+Some technical legal terminology was unfamiliar. For example, the distinction between a "data controller" and a "data processor" required clarification. The presenter used practical examples from university systems to bridge this gap.
+
+\subsubsection*{Learning Insights}
+The talk highlighted three core principles:
+\begin{enumerate}
+    \item \textbf{Data minimisation:} Only collect data that is strictly necessary
+    \item \textbf{Informed consent:} Users must know what data is collected and why
+    \item \textbf{Security measures:} Encryption, access control, and regular audits are mandatory
+\end{enumerate}
+These principles were immediately applied to the WasteFlow project by ensuring passwords were hashed (not stored in plain text) and that the JSON file database was not publicly accessible.
+
+\subsubsection*{Applications}
+Privacy compliance is a legal requirement for any internet-facing application. Understanding these regulations is essential for employment in fintech, healthtech, and any organisation handling user data.
+
+% ---------- 4.3 ----------
+\subsection{WasteFlow Frontend Deployment to Vercel}
+\label{subsec:wasteflow_frontend}
+
+\subsubsection*{Procedures Followed}
+\begin{enumerate}
+    \item Prepared the React+Vite application for production by configuring \texttt{vercel.json} for SPA rewrites
+    \item Linked the GitHub repository to Vercel for automatic deployments
+    \item Ran \texttt{vercel --prod} to trigger the initial production deployment
+    \item Encountered a build cache issue where the old \texttt{VITE\_API\_URL} environment variable persisted
+    \item Hardcoded the production backend URL in \texttt{api.ts} using \texttt{import.meta.env.PROD} to override the stale Vercel variable
+    \item Verified the fix by inspecting the compiled JavaScript bundle for the correct backend URL
+    \item Redeployed and confirmed the frontend was live at \texttt{https://wasteflow-frontend.vercel.app}
+\end{enumerate}
+
+\begin{figure}[H]
+    \centering
+    \fbox{\parbox{0.8\textwidth}{\centering\vspace{3cm}\textbf{Photo: Vercel Deployment Log}\vspace{3cm}}}
+    \caption{Vercel production deployment output showing successful build and alias}
+    \label{fig:vercel_deploy}
+\end{figure}
+
+\subsubsection*{Tools/Resources Used}
+\begin{itemize}
+    \item Vercel CLI version 55.0.0
+    \item GitHub for source control and CI/CD triggers
+    \item Vite for building the production bundle
+    \item Browser developer tools for inspecting the compiled JavaScript
+\end{itemize}
+
+\subsubsection*{Challenges Encountered}
+The first deployment used an old \texttt{VITE\_API\_URL} environment variable stored in Vercel's project settings. Adding a \texttt{.env.production} file did not override it because Vercel project-level variables take precedence. The fix was to change the source code logic so that production mode always uses the hardcoded URL, ignoring the environment variable entirely.
+
+\subsubsection*{Learning Insights}
+Environment variable precedence matters: system-level over project-level over file-level. Build caches can cause stale values to persist. The only reliable way to force a fresh build is to change source code or invalidate the cache.
+
+\subsubsection*{Applications}
+This deployment pattern is used by startups and enterprises alike. Vercel hosts millions of frontend applications using the same workflow.
+
+% ---------- 4.4 ----------
+\subsection{WasteFlow Backend Deployment to Render}
+\label{subsec:wasteflow_backend}
+
+\subsubsection*{Procedures Followed}
+\begin{enumerate}
+    \item Created a \texttt{Dockerfile} based on \texttt{node:18-alpine} for the backend
+    \item Configured \texttt{render.yaml} with build and start commands
+    \item Enabled auto-seeding of demo users (including admin account) on service start
+    \item Used the Render Dashboard to create a Docker web service linked to the GitHub repository
+    \item Monitored the build logs until the service reached "Live" status
+    \item Tested the health endpoint: \texttt{GET /api/health} returned \texttt{\{"status":"OK"\}}
+    \item Tested login: \texttt{POST /api/auth/login} returned 200 with valid access and refresh tokens
+    \item Updated the frontend's production API URL to point to the new Render backend (\texttt{https://wasteflow-backend-5tr6.onrender.com})
+\end{enumerate}
+
+\begin{figure}[H]
+    \centering
+    \fbox{\parbox{0.8\textwidth}{\centering\vspace{3cm}\textbf{Photo: Render Dashboard Showing Live Service}\vspace{3cm}}}
+    \caption{Render Docker web service dashboard showing health check passing}
+    \label{fig:render_dashboard}
+\end{figure}
+
+\subsubsection*{Tools/Resources Used}
+\begin{itemize}
+    \item Render Dashboard (US region)
+    \item Docker with \texttt{node:18-alpine} base image
+    \item Express.js backend with TypeScript
+    \item Postman for API endpoint testing
+\end{itemize}
+
+\subsubsection*{Challenges Encountered}
+The initial attempt to create a Render Web Service (non-Docker) failed because the build command exceeded Render's free-tier time limit. Switching to a Docker-based deployment resolved this, as the Docker image could be built locally (or with a more efficient Dockerfile) and deployed faster.
+
+\subsubsection*{Learning Insights}
+Docker provides consistency between development and production environments. It also simplifies deployment on platforms like Render because the build process is encapsulated in the image. Understanding when to use Docker versus platform-native builds is a practical skill.
+
+\subsubsection*{Applications}
+Docker-based deployments are standard in cloud-native development. Render, Heroku, AWS ECS, and Google Cloud Run all support Docker images for production services.
+
+% ---------- 4.5 ----------
+\subsection{End-to-End Verification}
+\label{subsec:verification}
+
+\subsubsection*{Procedures Followed}
+\begin{enumerate}
+    \item Opened the frontend URL in a browser: \texttt{https://wasteflow-frontend.vercel.app}
+    \item Verified the login page loaded correctly
+    \item Logged in with the demo admin credentials (\texttt{komakech@gmail.com} / \texttt{job256})
+    \item Confirmed the dashboard displayed after successful authentication
+    \item Used browser developer tools to verify that API calls were directed to the correct Render backend URL
+    \item Checked that the QR code (pointing to the frontend) was up to date
+\end{enumerate}
+
+\begin{figure}[H]
+    \centering
+    \fbox{\parbox{0.8\textwidth}{\centering\vspace{3cm}\textbf{Photo: Login Page of WasteFlow Application}\vspace{3cm}}}
+    \caption{WasteFlow login page loaded from the production frontend URL}
+    \label{fig:login_page}
+\end{figure}
+
+\subsubsection*{Tools/Resources Used}
+\begin{itemize}
+    \item Web browser (Chrome)
+    \item Chrome Developer Tools (Network tab)
+    \item QR code scanner app (mobile phone)
+\end{itemize}
+
+\subsubsection*{Challenges Encountered}
+The first verification attempt revealed that the frontend was still calling the old backend URL. This was because the JavaScript bundle had been cached and the build cache was being restored across deployments. The fix required changing source code (not just environment variables) to force a cache miss.
+
+\subsubsection*{Learning Insights}
+End-to-end testing is the only reliable way to verify a deployment. Unit tests pass even when environment variables are misconfigured. Always test the real production URL with actual credentials.
+
+\subsubsection*{Applications}
+QA teams in software companies perform smoke tests after every deployment to catch configuration errors before users do.
+
+% ============================================================
+% 5. REFLECTION
+% ============================================================
+\newpage
+\section{Reflection}
+\label{sec:reflection}
+
+Recess Week was a transformative experience. Working on two distinct projects --- ZAMAD and WasteFlow --- provided exposure to different technology stacks and deployment workflows.
+
+The ZAMAD project deepened my understanding of token-based authentication. Building the JWT flow from scratch, rather than using a third-party service, clarified exactly how access tokens work under the hood. When the ICT Services talk later covered data privacy, I immediately saw how token security (HTTPS transmission, short expiry times, secure storage) maps directly to legal compliance requirements.
+
+The WasteFlow deployment process was particularly instructive. Debugging the environment variable issue taught me that build caches can silently serve stale configurations. The solution --- hardcoding production values at the source code level --- is a defensive practice I will carry forward.
+
+The ICT Services talk on privacy was timely. Learning about the Uganda Data Protection and Privacy Act (2019) gave legal context to the technical decisions we were making. Concepts like data minimisation and informed consent are now part of my design thinking rather than abstract ideas.
+
+Overall, the week improved my confidence in deploying applications to production, understanding deployment infrastructure, and considering legal obligations when building internet-facing software.
+
+% ============================================================
+% 6. ACTION PLAN
+% ============================================================
+\section{Action Plan for Next Week}
+\label{sec:action_plan}
+
+\subsection{Theoretical Review}
+\begin{itemize}
+    \item Study Docker multi-stage builds for optimised production images
+    \item Review Uganda's Data Protection and Privacy Act (2019) in more detail
+    \item Research OAuth 2.0 and OpenID Connect as alternatives to custom JWT auth
+\end{itemize}
+
+\subsection{Skill Development}
+\begin{itemize}
+    \item Implement automated CI/CD pipelines using GitHub Actions
+    \item Add automated end-to-end tests using Playwright or Cypress
+    \item Set up monitoring and logging for the WasteFlow production backend
+\end{itemize}
+
+\subsection{Expected Outcomes}
+\begin{itemize}
+    \item Fully automated deployment pipeline (push to main $\rightarrow$ deploy to production)
+    \item Test suite that catches configuration errors before deployment
+    \item Compliance checklist based on the Data Protection and Privacy Act for future projects
+\end{itemize}
+
+% ============================================================
+% 7. ONLINE PRESENCE
+% ============================================================
+\section{Online Presence}
+\label{sec:online}
+
+\begin{itemize}
+    \item \textbf{GitHub Repository (WasteFlow):} \url{https://github.com/ainomugishaemma-a11y/wasteflow}
+    \item \textbf{Live Frontend:} \url{https://wasteflow-frontend.vercel.app}
+    \item \textbf{Live Backend:} \url{https://wasteflow-backend-5tr6.onrender.com}
+\end{itemize}
+
+% ============================================================
+% REFERENCES
+% ============================================================
+\section{References}
+\label{sec:references}
+
+\begin{enumerate}
+    \item Uganda Data Protection and Privacy Act, 2019. \textit{Acts of Parliament of Uganda}.
+    \item European Parliament. (2016). \textit{General Data Protection Regulation (GDPR)}. Regulation (EU) 2016/679.
+    \item Vercel Documentation. \textit{Environment Variables}. \url{https://vercel.com/docs/projects/environment-variables}
+    \item Render Documentation. \textit{Docker Deployments}. \url{https://render.com/docs/docker}
+    \item JWT.IO. \textit{JSON Web Token Introduction}. \url{https://jwt.io/introduction}
+    \item React Documentation. \textit{Deploying a React App}. \url{https://react.dev/learn/deployment}
+\end{enumerate}
+
+\end{document}

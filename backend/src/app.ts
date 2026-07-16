@@ -11,6 +11,7 @@ import reportRoutes from './routes/reports';
 import dashboardRoutes from './routes/dashboard';
 
 const app: Express = express();
+app.set('trust proxy', 1);
 
 app.use(helmet());
 app.use(cors({
