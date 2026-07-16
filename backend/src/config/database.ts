@@ -50,6 +50,13 @@ const SEED_USERS = [
   { fullname: 'Gerald User', email: 'gerald@gmail.com', password: 'job256', role: 'collection_personnel', status: 'active' },
 ];
 
+const SEED_BINS = [
+  { bin_code: 'BIN-1001', location: 'North Wing - Entrance', hospital_id: 1, capacity_percentage: 0, status: 'available', latitude: 0.3476, longitude: 32.5825 },
+  { bin_code: 'BIN-1002', location: 'Emergency Dept', hospital_id: 1, capacity_percentage: 0, status: 'available', latitude: 0.3477, longitude: 32.5826 },
+  { bin_code: 'BIN-1003', location: 'Ward B', hospital_id: 1, capacity_percentage: 0, status: 'available', latitude: 0.3478, longitude: 32.5827 },
+  { bin_code: 'BIN-2001', location: 'Main Corridor', hospital_id: 2, capacity_percentage: 0, status: 'available', latitude: 0.3480, longitude: 32.5830 },
+];
+
 function hashPassword(password: string): string {
   return bcrypt.hashSync(password, 10);
 }
@@ -67,6 +74,13 @@ export async function initDatabase(): Promise<void> {
         password: hashPassword(u.password),
       }));
       seeded.nextId.users = SEED_USERS.length + 1;
+      seeded.bins = SEED_BINS.map((b, i) => ({
+        id: i + 1,
+        ...b,
+        last_update: new Date().toISOString(),
+        created_at: new Date().toISOString(),
+      }));
+      seeded.nextId.bins = SEED_BINS.length + 1;
       await fs.writeFile(DB_FILE, JSON.stringify(seeded, null, 2), 'utf-8');
     }
   } catch (error) {
