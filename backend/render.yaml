@@ -3,7 +3,7 @@ services:
     name: wasteflow-backend
     env: node
     buildCommand: npm install && npx tsc
-    startCommand: node api/index.js
+    startCommand: node dist/index.js
     envVars:
       - key: NODE_ENV
         value: production
