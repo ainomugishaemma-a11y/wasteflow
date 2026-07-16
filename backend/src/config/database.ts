@@ -52,9 +52,6 @@ const SEED_USERS = [
 
 const SEED_BINS = [
   { bin_code: 'BIN-1001', location: 'North Wing - Entrance', hospital_id: 1, capacity_percentage: 0, status: 'available', latitude: 0.3476, longitude: 32.5825 },
-  { bin_code: 'BIN-1002', location: 'Emergency Dept', hospital_id: 1, capacity_percentage: 0, status: 'available', latitude: 0.3477, longitude: 32.5826 },
-  { bin_code: 'BIN-1003', location: 'Ward B', hospital_id: 1, capacity_percentage: 0, status: 'available', latitude: 0.3478, longitude: 32.5827 },
-  { bin_code: 'BIN-2001', location: 'Main Corridor', hospital_id: 2, capacity_percentage: 0, status: 'available', latitude: 0.3480, longitude: 32.5830 },
 ];
 
 function hashPassword(password: string): string {
